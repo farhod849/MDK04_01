@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c251a697315a42839320dbd58c500a96" Name="Diagram1">
+        <EntityTypeShape EntityType="PraktikusBDModel.Managers" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikusBDModel.Orders" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikusBDModel.SalaryCalc" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikusBDModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikusBDModel.Users" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikusBDModel.WorkGroup" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="PraktikusBDModel.FK__Orders__Order_Ma__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikusBDModel.FK__SalaryCal__ID_Of__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikusBDModel.FK__Orders__Current___3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikusBDModel.FK__SalaryCal__ID_Of__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikusBDModel.FK__SalaryCal__ID_Of__5629CD9C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище PraktikusBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Managers">
+    <Key>
+      <PropertyRef Name="ID_Manager" />
+    </Key>
+    <Property Name="ID_Manager" Type="int" Nullable="false" />
+    <Property Name="FIO" Type="nvarchar" MaxLength="20" />
+    <Property Name="Phone_Number" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email_Adress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="ID_Order" />
+    </Key>
+    <Property Name="ID_Order" Type="int" Nullable="false" />
+    <Property Name="Order_Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="Order_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Order_Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="Current_WorkGroup" Type="int" />
+    <Property Name="Order_Manager" Type="int" />
+    <Property Name="TotalPriceOrder" Type="int" />
+  </EntityType>
+  <EntityType Name="SalaryCalc">
+    <Key>
+      <PropertyRef Name="ID_Ticket" />
+    </Key>
+    <Property Name="ID_Ticket" Type="int" Nullable="false" />
+    <Property Name="ID_Of_Order" Type="int" Nullable="false" />
+    <Property Name="ID_Of_Manager" Type="int" Nullable="false" />
+    <Property Name="Salary_For_Manager" Type="int" />
+    <Property Name="ID_Of_Workgroup" Type="int" Nullable="false" />
+    <Property Name="Salary_For_Workgroup" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID_User" />
+    </Key>
+    <Property Name="ID_User" Type="int" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="30" />
+    <Property Name="Password" Type="nvarchar" MaxLength="40" />
+    <Property Name="Role" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="WorkGroup">
+    <Key>
+      <PropertyRef Name="ID_WorkGroup" />
+    </Key>
+    <Property Name="ID_WorkGroup" Type="int" Nullable="false" />
+    <Property Name="Name_WorkGroup" Type="nvarchar" MaxLength="20" />
+    <Property Name="Number_Of_Workers" Type="int" />
+  </EntityType>
+  <Association Name="FK__Orders__Current___3A81B327">
+    <End Role="WorkGroup" Type="Self.WorkGroup" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkGroup">
+        <PropertyRef Name="ID_WorkGroup" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Current_WorkGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Order_Ma__3B75D760">
+    <End Role="Managers" Type="Self.Managers" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Managers">
+        <PropertyRef Name="ID_Manager" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Order_Manager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalaryCal__ID_Of__5441852A">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="SalaryCalc" Type="Self.SalaryCalc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="ID_Order" />
+      </Principal>
+      <Dependent Role="SalaryCalc">
+        <PropertyRef Name="ID_Of_Order" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalaryCal__ID_Of__5535A963">
+    <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+    <End Role="SalaryCalc" Type="Self.SalaryCalc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Managers">
+        <PropertyRef Name="ID_Manager" />
+      </Principal>
+      <Dependent Role="SalaryCalc">
+        <PropertyRef Name="ID_Of_Manager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalaryCal__ID_Of__5629CD9C">
+    <End Role="WorkGroup" Type="Self.WorkGroup" Multiplicity="1" />
+    <End Role="SalaryCalc" Type="Self.SalaryCalc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkGroup">
+        <PropertyRef Name="ID_WorkGroup" />
+      </Principal>
+      <Dependent Role="SalaryCalc">
+        <PropertyRef Name="ID_Of_Workgroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище PraktikusBDModelContainer">
+    <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryCalc" EntityType="Self.SalaryCalc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkGroup" EntityType="Self.WorkGroup" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Orders__Current___3A81B327" Association="Self.FK__Orders__Current___3A81B327">
+      <End Role="WorkGroup" EntitySet="WorkGroup" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Order_Ma__3B75D760" Association="Self.FK__Orders__Order_Ma__3B75D760">
+      <End Role="Managers" EntitySet="Managers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalaryCal__ID_Of__5441852A" Association="Self.FK__SalaryCal__ID_Of__5441852A">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="SalaryCalc" EntitySet="SalaryCalc" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalaryCal__ID_Of__5535A963" Association="Self.FK__SalaryCal__ID_Of__5535A963">
+      <End Role="Managers" EntitySet="Managers" />
+      <End Role="SalaryCalc" EntitySet="SalaryCalc" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalaryCal__ID_Of__5629CD9C" Association="Self.FK__SalaryCal__ID_Of__5629CD9C">
+      <End Role="WorkGroup" EntitySet="WorkGroup" />
+      <End Role="SalaryCalc" EntitySet="SalaryCalc" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
